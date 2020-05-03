@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SW.UI.Data;
 
 namespace SW.UI.Migrations
 {
     [DbContext(typeof(SWContext))]
-    partial class SWContextModelSnapshot : ModelSnapshot
+    [Migration("20200502223724_AddModels")]
+    partial class AddModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -344,105 +346,6 @@ namespace SW.UI.Migrations
                     b.ToTable("PersonGroupAdmins");
                 });
 
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PersonPhotoPost", b =>
-                {
-                    b.Property<string>("PhotoPostId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PersonId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PhotoPostId", "PersonId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonPhotoPost");
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PersonTextPost", b =>
-                {
-                    b.Property<string>("TextPostId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PersonId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("TextPostId", "PersonId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonTextPost");
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PersonVideoPost", b =>
-                {
-                    b.Property<string>("VideoPostId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PersonId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("VideoPostId", "PersonId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonVideoPost");
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PhotoPost", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PhotoLocation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PhotoPosts");
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.TextPost", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TextPosts");
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.VideoPost", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VideoLocation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VideoPosts");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -550,51 +453,6 @@ namespace SW.UI.Migrations
                     b.HasOne("SW.UI.Areas.Identity.Data.Person", "Person")
                         .WithMany("PersonGroupAdmins")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PersonPhotoPost", b =>
-                {
-                    b.HasOne("SW.UI.Areas.Identity.Data.Person", "Person")
-                        .WithMany("PersonPhotoPosts")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SW.UI.Areas.Identity.Data.PhotoPost", "PhotoPost")
-                        .WithMany("PersonPhotoPosts")
-                        .HasForeignKey("PhotoPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PersonTextPost", b =>
-                {
-                    b.HasOne("SW.UI.Areas.Identity.Data.Person", "Person")
-                        .WithMany("PersonTextPosts")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SW.UI.Areas.Identity.Data.TextPost", "TextPost")
-                        .WithMany("PersonTextPosts")
-                        .HasForeignKey("TextPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SW.UI.Areas.Identity.Data.PersonVideoPost", b =>
-                {
-                    b.HasOne("SW.UI.Areas.Identity.Data.Person", "Person")
-                        .WithMany("PersonVideoPosts")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SW.UI.Areas.Identity.Data.VideoPost", "VideoPost")
-                        .WithMany("PersonVideoPosts")
-                        .HasForeignKey("VideoPostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
