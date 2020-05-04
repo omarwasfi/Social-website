@@ -16,6 +16,8 @@ namespace SW.UI.Areas.Identity.Data
         [MaxLength(100)]
         public string LastName { get; set; }
 
+        public string ProfilePictureLocation { get; set; }
+
         [MaxLength(250)]
         public string Bio { get; set; }
 
