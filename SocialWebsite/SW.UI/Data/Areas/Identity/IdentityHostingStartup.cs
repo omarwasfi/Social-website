@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SW.UI.Areas.Identity.Data;
 using SW.UI.Data;
+using SW.UI.Data.Interfaces;
+using SW.UI.Data.Services;
 
 [assembly: HostingStartup(typeof(SW.UI.Areas.Identity.IdentityHostingStartup))]
 namespace SW.UI.Areas.Identity
@@ -27,6 +29,8 @@ namespace SW.UI.Areas.Identity
 
 
                 services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+
+                services.AddScoped<IPersonDataService, PersonDataService>();
 
 
                 services.Configure<IdentityOptions>(options =>

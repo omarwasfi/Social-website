@@ -29,7 +29,7 @@ namespace SW.UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSyncfusionBlazor();
-            services.AddSyncfusionBlazor(true);
+            //services.AddSyncfusionBlazor(true);
 
 
 
