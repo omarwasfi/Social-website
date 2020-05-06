@@ -26,9 +26,12 @@
     <PackageReference Include="Syncfusion.Blazor" Version="18.1.0.48" />
   </ItemGroup>
 
+<<<<<<< HEAD:SocialWebsite/SW.UI/SW.csproj
   <ItemGroup>
     <Folder Include="wwwroot\img\Profile\" />
     <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
+=======
+>>>>>>> parent of 4bd6042... Login/Register:SocialWebsite/SW.UI/SW.UI.csproj
 </Project>

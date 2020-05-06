@@ -11,18 +11,11 @@
                     </a>
                     <hr class="sidebar-divider my-0">
                     <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                        <AuthorizeView>
-                            <Authorized>
-                                <li class="nav-item" role="presentation"><a class="nav-link active" href="/"><i class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" href="/groups"><i class="fas fa-table"></i><span>Groups</span></a></li>
-                            </Authorized>
-                            <NotAuthorized>
-                                <li class="nav-item" role="presentation"><a class="nav-link" href="/Identity/Account/Login"><i class="far fa-user-circle"></i><span>Login</span></a></li>
-                                <li class="nav-item" role="presentation"><a class="nav-link" href="/Identity/Account/Register"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
-                            </NotAuthorized>
-                        </AuthorizeView>
-
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="/"><i class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/"><i class="fas fa-table"></i><span>Groups</span></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/login"><i class="far fa-user-circle"></i><span>Login</span></a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/register"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
                     </ul>
                     <div class="text-center d-none d-md-inline">
                         <button  @onclick="ToggleNavMenu" class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
@@ -37,12 +30,7 @@
                         <div class="container-fluid">
                             <button @onclick="ToggleNavMenu" class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                             <SearchNav />
-                            <AuthorizeView>
-                                <Authorized>
-                                    <UserNav />
-                                </Authorized>
-                            </AuthorizeView>
-
+                            <UserNav />
                         </div>
                     </nav>
 
