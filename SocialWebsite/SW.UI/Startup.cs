@@ -30,8 +30,11 @@ namespace SW.UI
             services.AddServerSideBlazor();
             services.AddSyncfusionBlazor();
 <<<<<<< HEAD
+<<<<<<< HEAD
             //services.AddSyncfusionBlazor(true);
 
+=======
+>>>>>>> parent of 4bd6042... Login/Register
 =======
 >>>>>>> parent of 4bd6042... Login/Register
 

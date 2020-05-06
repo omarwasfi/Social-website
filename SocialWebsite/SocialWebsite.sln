@@ -9,6 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW", "SW.UI\SW.csproj", "{A
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.UI", "SW.UI\SW.UI.csproj", "{AC8D4692-AEEF-4B42-ABAC-21A88D910711}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SW.Data", "SW.Data\SW.Data.csproj", "{3C3A1343-C24B-4F0C-B26A-B9DEB1C361CA}"
+<<<<<<< HEAD
+>>>>>>> parent of 4bd6042... Login/Register
+=======
 >>>>>>> parent of 4bd6042... Login/Register
 EndProject
 Global
@@ -22,11 +25,17 @@ Global
 		{AC8D4692-AEEF-4B42-ABAC-21A88D910711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC8D4692-AEEF-4B42-ABAC-21A88D910711}.Release|Any CPU.Build.0 = Release|Any CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4bd6042... Login/Register
 		{3C3A1343-C24B-4F0C-B26A-B9DEB1C361CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C3A1343-C24B-4F0C-B26A-B9DEB1C361CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C3A1343-C24B-4F0C-B26A-B9DEB1C361CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C3A1343-C24B-4F0C-B26A-B9DEB1C361CA}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+>>>>>>> parent of 4bd6042... Login/Register
+=======
 >>>>>>> parent of 4bd6042... Login/Register
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
