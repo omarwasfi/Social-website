@@ -1,0 +1,45 @@
+﻿@page "/authinticationrequired"
+@inject NavigationManager NavigationManager
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-12 col-xl-10">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-flex">
+                            <div class="flex-grow-1 bg-login-image" style="background-image: url(img/dogs/image3.jpeg);"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h4 class="text-dark mb-4">Login or Register to continue</h4>
+                                </div>
+                                <form class="user">
+                                    <button class="btn btn-primary btn-block text-white btn-user" @onclick="GoToLogin">Login</button>
+                                    <hr>
+                                </form>
+                                <form class="user"><button class="btn btn-primary btn-block text-white btn-user" @onclick="GoToRegister">Register<br></button></form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    private void GoToLogin()
+    {
+        NavigationManager.NavigateTo("Identity/Account/Login", true);
+
+    }
+
+    private void GoToRegister()
+    {
+        NavigationManager.NavigateTo("Identity/Account/Register", true);
+
+    }
+
+}
