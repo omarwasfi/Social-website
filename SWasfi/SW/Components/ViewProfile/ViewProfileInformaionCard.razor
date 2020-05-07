@@ -1,0 +1,28 @@
+﻿@using SW.Areas.Identity.Data;
+
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">User information</p>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small font-weight-bold">Full Name: @Person.FirstName @Person.LastName</h4>
+
+                        <h4 class="small font-weight-bold">Gender: @Person.Gender</h4>
+
+                        <h4 class="small font-weight-bold">Email: @Person.Email</h4>
+
+                        <h4 class="small font-weight-bold">Location: @Person.City , @Person.Country</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@code {
+    [Parameter]
+    public Person Person { get; set; }
+
+}

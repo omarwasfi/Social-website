@@ -26,6 +26,11 @@ namespace SW.DBServices.Services
             return await SWContext.Users.FirstOrDefaultAsync(x => x.UserName == userName);
         }
 
+        public async Task<Person> GetPersonById(string Id)
+        {
+            return await SWContext.Users.FirstOrDefaultAsync(x => x.Id == Id);
+        }
+
         public void UpdatePerson(Person person)
         {
             SWContext.Users.Update(person);
@@ -36,6 +41,8 @@ namespace SW.DBServices.Services
         {
             return await SWContext.Users.ToListAsync();
         }
+
+
     }
 }
 

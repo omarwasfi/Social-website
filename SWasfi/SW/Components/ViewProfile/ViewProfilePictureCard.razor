@@ -1,0 +1,31 @@
+﻿@using SW.Areas.Identity.Data;
+
+<div class="col-lg-4">
+    <div class="card mb-3">
+        <div class="card-body text-center shadow">
+            <img class="rounded-circle mb-3 mt-4" src=@ProfilePicLocation width="160" height="160">
+            <div class="mb-3"></div>
+            <h4 class="small font-weight-bold">@Person.Bio</h4>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Person Person { get; set; }
+
+    private string ProfilePicLocation { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(Person.ProfilePictureLocation))
+        {
+            ProfilePicLocation = "/img/dogs/image2.jpeg";
+        }
+        else
+        {
+            ProfilePicLocation = Person.ProfilePictureLocation;
+        }
+    }
+
+}
