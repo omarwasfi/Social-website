@@ -1,0 +1,72 @@
+﻿@using Syncfusion.Blazor.Inputs
+@using Newtonsoft.Json
+@using Syncfusion.Blazor.DropDowns
+@using SW.Areas.Identity.Data
+@using SW.DBServices.Interfaces;
+@inject IPersonDataService PersonData
+
+
+<div class="card shadow mb-3">
+    <div class="card-header py-3">
+        <p class="text-primary m-0 font-weight-bold">User Settings</p>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="Bio"><strong>Bio</strong></label>
+                    <SfTextBox @bind-Value="Person.Bio" Type="text" Placeholder="Enter your bio"></SfTextBox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="FirstName"><strong>First Name</strong></label>
+                    <SfTextBox @bind-Value="Person.FirstName" Type="text" Placeholder="Enter First Name"></SfTextBox>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="LastName"><strong>Last Name</strong></label>
+                    <SfTextBox @bind-Value="Person.LastName" Placeholder="Enter Last Name"></SfTextBox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="Gender"><strong>Gender</strong></label>
+                    <SfComboBox TValue="string" TItem="string" PopupHeight="230px"  Placeholder="Select your gender" @bind-Value="Person.Gender" DataSource="@TGenders">
+                    </SfComboBox>
+                </div>
+            </div>
+        </form>
+
+        <div class="form-group"></div>
+
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                <button class="btn btn-primary btn-sm" @onclick="UpdatePersonInformation" type="submit">Save Settings</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Person Person { get; set; }
+
+    private void UpdatePersonInformation()
+    {
+        PersonData.UpdatePerson(Person);
+    }
+
+    private List<string> TGenders = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        TGenders.Add("Male");
+        TGenders.Add("Female");
+
+    }
+
+
+
+}

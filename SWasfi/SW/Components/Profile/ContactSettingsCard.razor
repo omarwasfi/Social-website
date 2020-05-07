@@ -1,0 +1,55 @@
+﻿@using Syncfusion.Blazor.Inputs
+@using SW.Areas.Identity.Data
+@using SW.DBServices.Interfaces;
+@inject IPersonDataService PersonData
+
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="EmailAddress"><strong>Email Address</strong></label>
+                    <SfTextBox Type="text" Readonly="true" @bind-Value="Person.Email" Placeholder="Enter your Email"></SfTextBox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="Bio"><strong>Phone Number</strong></label>
+                    <SfTextBox Type="text"  @bind-Value="Person.PhoneNumber" Placeholder="Enter your Phone Number"></SfTextBox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="Country"><strong>Country</strong></label>
+                    <SfTextBox Type="text" @bind-Value="Person.Country" Placeholder="Enter your Country"></SfTextBox>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                    <label for="City"><strong>City</strong></label>
+                    <SfTextBox Type="text" @bind-Value="Person.City" Placeholder="Enter your city"></SfTextBox>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="form-group"></div>
+
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                <button class="btn btn-primary btn-sm" @onclick="UpdatePersonInformation" type="submit">Save Settings</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+@code {
+    [Parameter]
+    public Person Person { get; set; }
+
+    private void UpdatePersonInformation()
+    {
+        PersonData.UpdatePerson(Person);
+    }
+}

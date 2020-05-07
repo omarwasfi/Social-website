@@ -1,20 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Hosting
 @using Syncfusion.Blazor.Inputs;
 @using System.IO;
+@using SW.Areas.Identity.Data
+@using SW.DBServices.Interfaces; 
 @inject IWebHostEnvironment  WebHostingEnviroment
+@inject IPersonDataService PersonData
 
 <div class="col-lg-4">
     <div class="card mb-3">
 
         <div class="card-body text-center shadow">
-            <img class="rounded-circle mb-3 mt-4" src="img/dogs/image2.jpeg" width="160" height="160">
-            <div class="mb-3">
-                <button class="btn btn-primary btn-sm" type="button">Change Photo</button>
+            <img class="rounded-circle mb-3 mt-4" src=@ProfilePicLocation width="160" height="160">
 
-                <SfUploader AutoUpload="false" AllowedExtensions=".jpg, .png, .jpeg">
-                    <UploaderEvents ValueChange="OnChange"></UploaderEvents>
-                </SfUploader>
-            </div>
+            @if (!Uploading)
+            {
+                <div class="mb-3">
+                    <button class="btn btn-primary btn-sm" @onclick="ChangeUploadState" type="button">Change Photo</button>
+                </div>
+            }
+
+            @if (Uploading)
+            {
+                <div class="mb-3">
+                    <SfUploader AutoUpload="true" Multiple="true" AllowedExtensions=".jpg, .png, .jpeg">
+                        <UploaderEvents ValueChange="OnChange"></UploaderEvents>
+                    </SfUploader>
+
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary btn-sm" @onclick="ChangeUploadState" type="button">Cancel</button>
+                </div>
+            }
+
         </div>
 
     </div>
@@ -22,17 +39,69 @@
 
 
 @code {
+    [Parameter]
+    public Person Person { get; set; }
+
+
+    private string ProfilePicLocation { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(Person.ProfilePictureLocation))
+        {
+            ProfilePicLocation = "/img/dogs/image2.jpeg";
+        }
+        else
+        {
+            ProfilePicLocation = Person.ProfilePictureLocation;
+        }
+    }
+
+    /* Uploading buttons events */
+    private Boolean Uploading { get; set; } = false;
+
+    private void ChangeUploadState()
+    {
+        Uploading = !Uploading;
+    }
 
     private void OnChange(UploadChangeEventArgs args)
     {
+        string newPicPath = "";
         foreach (var file in args.Files)
         {
             string path = WebHostingEnviroment.WebRootPath;
-            path += "/img/profile/" + file.FileInfo.Name;
+            newPicPath = "/img/profile/" + ConvertUserNameToPicName(Person.UserName) + file.FileInfo.Name;
+            path += newPicPath;
             FileStream filestream = new FileStream(path, FileMode.Create, FileAccess.Write);
             file.Stream.WriteTo(filestream);
             filestream.Close();
             file.Stream.Close();
         }
+       
+        UpdatePersonInformation(newPicPath);
+        ChangeProfilePicure();
+        ChangeUploadState();
+    }
+
+    private string ConvertUserNameToPicName(string username)
+    {
+        return username.Replace("@", "-").Replace(".", "-") + "-";
+    }
+
+    /// <summary>
+    /// The new Picture path of this user
+    /// </summary>
+    /// <param name="newPicPath"></param>
+    private void UpdatePersonInformation(string newPicPath)
+    {
+        Person.ProfilePictureLocation = newPicPath;
+        PersonData.UpdatePerson(Person);
+
+    }
+
+    private void ChangeProfilePicure()
+    {
+        ProfilePicLocation = Person.ProfilePictureLocation;
     }
 }
