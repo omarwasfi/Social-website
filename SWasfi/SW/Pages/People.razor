@@ -1,0 +1,168 @@
+﻿@page "/people"
+@using Syncfusion.Blazor.Grids
+@using SW.Areas.Identity.Data;
+@using SW.DBServices.Interfaces;
+@using Syncfusion.Blazor.Inputs
+@inject IPersonDataService PersonData
+@inject NavigationManager NavigationManager
+
+<div class="d-sm-flex justify-content-between align-items-center mb-4">
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+
+                <div class="row align-items-center no-gutters">
+                    <div class="col mr-2">
+                        <SfTextBox Placeholder="Search" @bind-Value="SearchValue"></SfTextBox>
+                    </div>
+                    <div class="col-auto">
+                        <button @onclick="UpdatePeopleList" class="btn btn-link">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+            <SfGrid DataSource="@PeopleList" AllowPaging="true">
+                <GridPageSettings PageCount="5" PageSizes="true"></GridPageSettings>
+                <GridTemplates>
+                    <RowTemplate>
+                        @{
+                            Person person = (context as Person);
+
+                            <td class="photo">
+                                @if (string.IsNullOrEmpty(person.ProfilePictureLocation))
+                                {
+                                    <img src="img/dogs/image2.jpeg" width="100" height="100">
+
+                                }
+                                else
+                                {
+                                    <img src=@person.ProfilePictureLocation width="100" height="100">
+                                }
+                            </td>
+                            <td class="details">
+                                <table class="CardTable" cellpadding="3" cellspacing="2">
+                                    <colgroup>
+                                        <col width="50%">
+                                        <col width="50%">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <td class="CardHeader">First Name </td>
+                                            <td>@person.FirstName </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="CardHeader">Last Name</td>
+                                            <td>@person.LastName </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="CardHeader">
+                                                Email
+                                            </td>
+                                            <td>
+                                                @person.Email
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="CardHeader">
+                                                Gender
+                                            </td>
+                                            <td>
+                                                @person.Gender
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <button class="btn btn-link" @onclick="(()=> GoToProfile(person))"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>View Profile</button>
+
+                            </td>
+
+                        }
+                    </RowTemplate>
+                </GridTemplates>
+                <GridColumns>
+                    <GridColumn HeaderText="Person Image" Width="150" TextAlign="TextAlign.Center"> </GridColumn>
+                    <GridColumn HeaderText="Person Details" Width="200" TextAlign="TextAlign.Center"></GridColumn>
+                </GridColumns>
+            </SfGrid>
+        </div>
+    </div>
+</div>
+
+@code {
+    public List<Person> PeopleList { get; set; }
+
+    SfTextBox SearchBar;
+
+    private string SearchValue { get; set; } = "";
+
+
+    private async Task UpdatePeopleList()
+    {
+        PeopleList = await PersonData.FilterPeopleByFullName(SearchValue);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        PeopleList = await PersonData.GetPeople();
+    }
+
+    private void GoToProfile(Person person)
+    {
+        NavigationManager.NavigateTo("viewprofile/" + person.Id);
+    }
+}
+
+
+<style type="text/css" class="cssStyles">
+
+
+    .photo img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        box-shadow: inset 0 0 1px #e0e0e0, inset 0 0 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .photo,
+    .details {
+        border-color: #e0e0e0;
+        border-style: solid;
+    }
+
+    .photo {
+        border-width: 1px 0px 0px 0px;
+        text-align: center;
+    }
+
+    .details {
+        border-width: 1px 0px 0px 0px;
+        padding-left: 18px;
+    }
+
+    .e-bigger .details {
+        padding-left: 25px;
+    }
+
+    .e-device .details {
+        padding-left: 8px;
+    }
+
+    .details > table {
+        width: 100%;
+    }
+
+    .CardHeader {
+        font-weight: 600;
+    }
+
+    td {
+        padding: 2px 2px 3px 4px;
+    }
+</style>

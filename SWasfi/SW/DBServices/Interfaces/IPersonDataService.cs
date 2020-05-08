@@ -25,6 +25,13 @@ namespace SW.DBServices.Interfaces
         Task<Person> GetPersonById(string id);
 
         /// <summary>
+        /// Get Person by the Id
+        /// </summary>
+        /// <param name="id">The Id of the user in the database</param>
+        /// <returns></returns>
+        Task<List<Person>> FilterPeopleByFullName(string fullName);
+
+        /// <summary>
         /// Update Person Data
         /// </summary>
         /// <param name="person"></param>
